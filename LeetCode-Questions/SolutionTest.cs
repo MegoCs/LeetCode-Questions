@@ -24,7 +24,7 @@ namespace LeetCode_Questions
                     new int[] { 8, 9, 10 },
                     new int[] { 11, 12, 13 }
                 }, 
-                new int []{2,3,5,8,6,4,7,9,11,12,10,13 }
+                new int []{2,3,4,7,10,13,12,11,8,5,6,9 }
             }
         };
     }

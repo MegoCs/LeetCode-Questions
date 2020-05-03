@@ -14,44 +14,39 @@ namespace LeetCode_Questions
             //Convert result object to problem output type
             var expectedResult = (int[])value;
 
-            var result = FindDiagonalOrder(input);
+            var result = SpiralOrder(input);
 
             return result.SequenceEqual(expectedResult);
         }
-        int[] FindDiagonalOrder(int[][] matrix)
+        IList<int> SpiralOrder(int[][] matrix)
         {
             int rows = matrix.Length;
             if (rows == 0)
                 return Array.Empty<int>();
             int columns = matrix[0].Length;
-            List<int> result = new List<int>(rows * columns);
-            int direction = 0;
-            for (int rowDiagonalIndex = 0; rowDiagonalIndex < rows; rowDiagonalIndex++)
+            int cycles = rows > columns ? columns - 1 : rows - 1;
+            if (cycles == 0)
+                cycles = 1;
+            List<int> result = new List<int>();
+            for (int cycleIndex = 0; cycleIndex < cycles; cycleIndex++)
             {
-                int diagonalLength = (rowDiagonalIndex + 1) < columns ? rowDiagonalIndex + 1 : columns;
-                result.AddRange(PrintDiagonalFor(diagonalLength, rowDiagonalIndex, 0, matrix, direction++ % 2 == 0));
+                //print first row 
+                for (int j = cycleIndex; j <= columns - (cycleIndex + 1); j++)
+                    result.Add(matrix[cycleIndex][j]);
+
+                //print last column
+                for (int i = cycleIndex + 1; i < rows - cycleIndex; i++)
+                    result.Add(matrix[i][columns - 1 - cycleIndex]);
+
+                //print last row 
+                for (int j = columns - 1 - cycleIndex - 1; j > cycleIndex && result.Count != rows * columns; j--)
+                    result.Add(matrix[rows - 1 - cycleIndex][j]);
+
+                //print first column
+                for (int i = rows - 1 - cycleIndex; i > cycleIndex && result.Count != rows * columns; i--)
+                    result.Add(matrix[i][cycleIndex]);
             }
-            for (int lowerColumnDiagonalIndex = 1; lowerColumnDiagonalIndex < columns; lowerColumnDiagonalIndex++)
-            {
-                int diagonalLength = columns - lowerColumnDiagonalIndex < rows ? columns - lowerColumnDiagonalIndex : rows;
-                result.AddRange(PrintDiagonalFor(diagonalLength, rows - 1, lowerColumnDiagonalIndex, matrix, direction++ % 2 == 0));
-            }
-
-            return result.ToArray();
-        }
-        List<int> PrintDiagonalFor(int lengthOfDiagonal, int statringRowIndex, int startingColumnIndex, int[][] matrix, bool direction = true)
-        {
-            List<int> diagonal = new List<int>(lengthOfDiagonal)
-            {
-                matrix[statringRowIndex][startingColumnIndex]
-            };
-            for (int i = 1; i < lengthOfDiagonal; i++)
-                diagonal.Add(matrix[--statringRowIndex][++startingColumnIndex]);
-
-            if (!direction)
-                diagonal.Reverse();
-
-            return diagonal;
+            return result;
         }
     }
 }
