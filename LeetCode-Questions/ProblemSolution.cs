@@ -9,42 +9,33 @@ namespace LeetCode_Questions
         public bool ValidateSolutionAgainst(object key, object value)
         {
             //Convert Object to problem real type
-            var input = (int[][])key;
-        
+            var input = (int)key;
+
             //Convert result object to problem output type
-            var expectedResult = (int[])value;
+            var expectedResult = (List<List<int>>)value;
 
-            var result = SpiralOrder(input);
+            var result = Generate(input);
 
-            return result.SequenceEqual(expectedResult);
+            int i = 0;
+            foreach (var item in result)
+                if (!item.SequenceEqual(expectedResult[i++]))
+                    return false;
+
+            return true;
         }
-        IList<int> SpiralOrder(int[][] matrix)
+        public IList<IList<int>> Generate(int numRows)
         {
-            int rows = matrix.Length;
-            if (rows == 0)
-                return Array.Empty<int>();
-            int columns = matrix[0].Length;
-            int cycles = rows > columns ? columns - 1 : rows - 1;
-            if (cycles == 0)
-                cycles = 1;
-            List<int> result = new List<int>();
-            for (int cycleIndex = 0; cycleIndex < cycles; cycleIndex++)
+            IList<IList<int>> result = new List<IList<int>>();
+            for (int i = 0; i < numRows; i++)
             {
-                //print first row 
-                for (int j = cycleIndex; j <= columns - (cycleIndex + 1); j++)
-                    result.Add(matrix[cycleIndex][j]);
-
-                //print last column
-                for (int i = cycleIndex + 1; i < rows - cycleIndex; i++)
-                    result.Add(matrix[i][columns - 1 - cycleIndex]);
-
-                //print last row 
-                for (int j = columns - 1 - cycleIndex - 1; j > cycleIndex && result.Count != rows * columns; j--)
-                    result.Add(matrix[rows - 1 - cycleIndex][j]);
-
-                //print first column
-                for (int i = rows - 1 - cycleIndex; i > cycleIndex && result.Count != rows * columns; i--)
-                    result.Add(matrix[i][cycleIndex]);
+                result.Add(new List<int>());
+                for (int j = 0; j <= i; j++)
+                {
+                    if (j == 0 || j == i)
+                        result[i].Add(1);
+                    else
+                        result[i].Add(result[i - 1][j - 1] + result[i - 1][j]);
+                }
             }
             return result;
         }

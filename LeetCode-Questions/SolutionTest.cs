@@ -17,14 +17,14 @@ namespace LeetCode_Questions
         private static Dictionary<object, object> Inputs = new Dictionary<object, object>()
         {
             {
-                new int[][]
-                {
-                    new int[] { 2, 3, 4},
-                    new int[] { 5, 6, 7 },
-                    new int[] { 8, 9, 10 },
-                    new int[] { 11, 12, 13 }
-                }, 
-                new int []{2,3,4,7,10,13,12,11,8,5,6,9 }
+                5,
+                new List<List<int>>(){
+                    new List<int>{1 },
+                    new List<int>{1,1 },
+                    new List<int>{1,2,1 },
+                    new List<int>{1,3,3,1 },
+                    new List<int>{1,4,6,4,1 }                  
+               }
             }
         };
     }
