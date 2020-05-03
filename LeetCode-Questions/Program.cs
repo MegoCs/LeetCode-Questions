@@ -1,10 +1,14 @@
-﻿namespace LeetCode_Questions
+﻿using System;
+
+namespace LeetCode_Questions
 {
     class Program
     {
         static void Main(string[] args)
         {
-            SolutionTest.Run();
+            var results = SolutionTest.Run();
+            foreach (var item in results)
+                Console.WriteLine(item);
         }
     }
 }
