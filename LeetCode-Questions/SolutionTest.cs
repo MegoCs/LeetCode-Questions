@@ -18,13 +18,22 @@ namespace LeetCode_Questions
         private static Dictionary<object, object> Inputs = new Dictionary<object, object>()
         {
             {
-                Tuple.Create("1010","1011"),"10101"
+                Tuple.Create("aaaaa","bba"),-1
             },
             {
-                Tuple.Create("11","1"),"100"
+                Tuple.Create("hello","ll"),2
             },
             {
-                Tuple.Create("1","111"),"1000"
+                Tuple.Create("mississippi","issip"),4
+            },
+            {
+                Tuple.Create("hello","h"),0
+            },
+            {
+                Tuple.Create("hellp","p"),4
+            },
+            {
+                Tuple.Create("hello","lo"),3
             }
         };
     }

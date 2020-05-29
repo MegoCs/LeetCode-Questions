@@ -11,39 +11,34 @@ namespace LeetCode_Questions
             var input = (Tuple<string, string>)key;
 
             //Convert result object to problem output type
-            var expectedResult = (string)value;
+            var expectedResult = (int)value;
 
-            var result = AddBinary(input.Item1, input.Item2);
+            var result = StrStr(input.Item1, input.Item2);
 
             return result == expectedResult;
         }
-        public string AddBinary(string a, string b)
+        public int StrStr(string haystack, string needle)
         {
-            string result = string.Empty;
-            var aArr = a.ToCharArray();
-            var bArr = b.ToCharArray();
-            Array.Reverse(aArr);
-            Array.Reverse(bArr);
-            b = new string(bArr);
-            a = new string(aArr);
-            
-            int cary = 0;
-            for (int i = 0; i <a.Length||i<b.Length; i++)
+            if (string.Empty == needle)
+                return 0;
+            if (needle.Length > haystack.Length)
+                return -1;
+            int ni = 0;
+            for (int i = 0; i < haystack.Length; i++)
             {
-                var aDigit = a.Length > i ? int.Parse(a[i].ToString()) : 0;
-                var bDigit = b.Length > i ? int.Parse(b[i].ToString()) : 0;
-
-                int sum = aDigit + bDigit + cary;
-                cary = sum / 2;
-
-                result += (sum % 2).ToString();
+                if (haystack[i] == needle[ni])
+                {
+                    ni++;
+                    if (ni == needle.Length)
+                        return i + 1 - ni;
+                }
+                else
+                {
+                    i -= ni;
+                    ni = 0;
+                }
             }
-            if (cary == 1)
-                result += "1";
-
-             var resArr = result.ToCharArray();
-            Array.Reverse(resArr);
-            return new string(resArr);
+            return -1;
         }
     }
 }
