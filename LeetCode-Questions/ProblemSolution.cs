@@ -12,26 +12,22 @@ namespace LeetCode_Questions
             var input = (Tuple<int[],int>)key;
 
             //Convert result object to problem output type
-            var expectedResult = (int[])value;
+            var expectedResult = (int)value;
 
-            var result = TwoSum(input.Item1,input.Item2);
+            var result = RemoveElement(input.Item1,input.Item2);
 
-            return result .SequenceEqual( expectedResult);
+            return result.Equals( expectedResult);
         }
-        public int[] TwoSum(int[] numbers, int target)
+        public int RemoveElement(int[] nums, int val)
         {
-            int i = 0, j = numbers.Length - 1;
-            int sum = numbers[i] + numbers[j];
-            while (sum != target)
+            int i = 0;
+            int k = 0;
+            for (; i < nums.Length; i++)
             {
-                if (sum < target)
-                    i++;
-                else
-                    j--;
-                sum = numbers[i] + numbers[j];
+                if (nums[i]!=val)
+                    nums[k++] = nums[i];
             }
-                    return new int[] { i + 1, j + 1 };
-
+            return k;
         }
     }
 }
