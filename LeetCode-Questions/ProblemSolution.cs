@@ -9,21 +9,22 @@ namespace LeetCode_Questions
         public bool ValidateSolutionAgainst(object key, object value)
         {
             //Convert Object to problem real type
-            var input = (char[])key;
+            var input = (int[])key;
 
             //Convert result object to problem output type
-            var expectedResult = (char[])value;
-            ReverseString(input);
-            return input.SequenceEqual(expectedResult);
+            var expectedResult = (int)value;
+
+            var result = ArrayPairSum(input);
+
+            return result == expectedResult;
         }
-        public void ReverseString(char[] s)
+        public int ArrayPairSum(int[] nums)
         {
-            for (int i = 0,j= s.Length-1; i < s.Length/2; i++,j--)
-            {
-                var temp=s[i];
-                s[i] = s[j];
-                s[j] = temp;
-            }
+            Array.Sort(nums);
+            int res = 0;
+            for (int i = nums.Length-2; i >=0 ; i-=2)
+                res += nums[i];
+            return res;
         }
     }
 }

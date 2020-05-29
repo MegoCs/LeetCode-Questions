@@ -17,10 +17,10 @@ namespace LeetCode_Questions
         private static Dictionary<object, object> Inputs = new Dictionary<object, object>()
         {
             {
-                new char [] {'h','e','l','l','o'},new char [] {'o','l','l','e','h'}
+                new int [] {1,3,2,4},4
             },
             {
-                new char [] {'H','a','n','n','a','h'},new char [] { 'h', 'a', 'n', 'n', 'a', 'H' }
+                new int [] {1,2},1
             }
         };
     }
