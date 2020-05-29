@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace LeetCode_Questions
@@ -9,35 +8,42 @@ namespace LeetCode_Questions
         public bool ValidateSolutionAgainst(object key, object value)
         {
             //Convert Object to problem real type
-            var input = (int)key;
+            var input = (Tuple<string, string>)key;
 
             //Convert result object to problem output type
-            var expectedResult = (List<List<int>>)value;
+            var expectedResult = (string)value;
 
-            var result = Generate(input);
+            var result = AddBinary(input.Item1, input.Item2);
 
-            int i = 0;
-            foreach (var item in result)
-                if (!item.SequenceEqual(expectedResult[i++]))
-                    return false;
-
-            return true;
+            return result == expectedResult;
         }
-        public IList<IList<int>> Generate(int numRows)
+        public string AddBinary(string a, string b)
         {
-            IList<IList<int>> result = new List<IList<int>>();
-            for (int i = 0; i < numRows; i++)
+            string result = string.Empty;
+            var aArr = a.ToCharArray();
+            var bArr = b.ToCharArray();
+            Array.Reverse(aArr);
+            Array.Reverse(bArr);
+            b = new string(bArr);
+            a = new string(aArr);
+            
+            int cary = 0;
+            for (int i = 0; i <a.Length||i<b.Length; i++)
             {
-                result.Add(new List<int>());
-                for (int j = 0; j <= i; j++)
-                {
-                    if (j == 0 || j == i)
-                        result[i].Add(1);
-                    else
-                        result[i].Add(result[i - 1][j - 1] + result[i - 1][j]);
-                }
+                var aDigit = a.Length > i ? int.Parse(a[i].ToString()) : 0;
+                var bDigit = b.Length > i ? int.Parse(b[i].ToString()) : 0;
+
+                int sum = aDigit + bDigit + cary;
+                cary = sum / 2;
+
+                result += (sum % 2).ToString();
             }
-            return result;
+            if (cary == 1)
+                result += "1";
+
+             var resArr = result.ToCharArray();
+            Array.Reverse(resArr);
+            return new string(resArr);
         }
     }
 }
