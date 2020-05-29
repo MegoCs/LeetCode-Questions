@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace LeetCode_Questions
 {
@@ -17,10 +18,10 @@ namespace LeetCode_Questions
         private static Dictionary<object, object> Inputs = new Dictionary<object, object>()
         {
             {
-                new int [] {1,3,2,4},4
+                Tuple.Create(new int [] {2,7,11,15},9),new int [] { 1,2}
             },
             {
-                new int [] {1,2},1
+                Tuple.Create(new int [] {2,7,11,15},22),new int [] { 2,4}
             }
         };
     }

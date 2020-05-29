@@ -9,22 +9,29 @@ namespace LeetCode_Questions
         public bool ValidateSolutionAgainst(object key, object value)
         {
             //Convert Object to problem real type
-            var input = (int[])key;
+            var input = (Tuple<int[],int>)key;
 
             //Convert result object to problem output type
-            var expectedResult = (int)value;
+            var expectedResult = (int[])value;
 
-            var result = ArrayPairSum(input);
+            var result = TwoSum(input.Item1,input.Item2);
 
-            return result == expectedResult;
+            return result .SequenceEqual( expectedResult);
         }
-        public int ArrayPairSum(int[] nums)
+        public int[] TwoSum(int[] numbers, int target)
         {
-            Array.Sort(nums);
-            int res = 0;
-            for (int i = nums.Length-2; i >=0 ; i-=2)
-                res += nums[i];
-            return res;
+            int i = 0, j = numbers.Length - 1;
+            int sum = numbers[i] + numbers[j];
+            while (sum != target)
+            {
+                if (sum < target)
+                    i++;
+                else
+                    j--;
+                sum = numbers[i] + numbers[j];
+            }
+                    return new int[] { i + 1, j + 1 };
+
         }
     }
 }
