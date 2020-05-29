@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace LeetCode_Questions
@@ -8,37 +8,36 @@ namespace LeetCode_Questions
         public bool ValidateSolutionAgainst(object key, object value)
         {
             //Convert Object to problem real type
-            var input = (Tuple<string, string>)key;
+            var input = (string[])key;
 
             //Convert result object to problem output type
-            var expectedResult = (int)value;
+            var expectedResult = (string)value;
 
-            var result = StrStr(input.Item1, input.Item2);
+            var result = LongestCommonPrefix(input);
 
             return result == expectedResult;
         }
-        public int StrStr(string haystack, string needle)
+        public string LongestCommonPrefix(string[] strs)
         {
-            if (string.Empty == needle)
-                return 0;
-            if (needle.Length > haystack.Length)
-                return -1;
-            int ni = 0;
-            for (int i = 0; i < haystack.Length; i++)
+            if (strs.Length == 0)
+                return "";
+
+            if (strs.Length == 1)
+                return strs[0];
+
+            var common = strs[0];
+            SortedSet<int> commonPrefixes = new SortedSet<int>();
+            for (int i = 1; i < strs.Length; i++)
             {
-                if (haystack[i] == needle[ni])
-                {
-                    ni++;
-                    if (ni == needle.Length)
-                        return i + 1 - ni;
-                }
-                else
-                {
-                    i -= ni;
-                    ni = 0;
-                }
+                int j = 0;
+                for (; j < strs[i].Length && j < common.Length; j++)
+                    if (common[j] != strs[i][j])
+                        break;
+                commonPrefixes.Add(j);
+                if (j == 0)
+                    break;
             }
-            return -1;
+            return common.Substring(0, commonPrefixes.ElementAt(0));
         }
     }
 }
