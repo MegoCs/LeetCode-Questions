@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace LeetCode_Questions
@@ -8,36 +9,21 @@ namespace LeetCode_Questions
         public bool ValidateSolutionAgainst(object key, object value)
         {
             //Convert Object to problem real type
-            var input = (string[])key;
+            var input = (char[])key;
 
             //Convert result object to problem output type
-            var expectedResult = (string)value;
-
-            var result = LongestCommonPrefix(input);
-
-            return result == expectedResult;
+            var expectedResult = (char[])value;
+            ReverseString(input);
+            return input.SequenceEqual(expectedResult);
         }
-        public string LongestCommonPrefix(string[] strs)
+        public void ReverseString(char[] s)
         {
-            if (strs.Length == 0)
-                return "";
-
-            if (strs.Length == 1)
-                return strs[0];
-
-            var common = strs[0];
-            SortedSet<int> commonPrefixes = new SortedSet<int>();
-            for (int i = 1; i < strs.Length; i++)
+            for (int i = 0,j= s.Length-1; i < s.Length/2; i++,j--)
             {
-                int j = 0;
-                for (; j < strs[i].Length && j < common.Length; j++)
-                    if (common[j] != strs[i][j])
-                        break;
-                commonPrefixes.Add(j);
-                if (j == 0)
-                    break;
+                var temp=s[i];
+                s[i] = s[j];
+                s[j] = temp;
             }
-            return common.Substring(0, commonPrefixes.ElementAt(0));
         }
     }
 }

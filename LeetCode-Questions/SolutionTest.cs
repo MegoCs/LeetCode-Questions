@@ -17,19 +17,10 @@ namespace LeetCode_Questions
         private static Dictionary<object, object> Inputs = new Dictionary<object, object>()
         {
             {
-                new string [] {"dog","racecar","car"},""
+                new char [] {'h','e','l','l','o'},new char [] {'o','l','l','e','h'}
             },
             {
-                new string [] {"flower","0low","flight"},""
-            },
-            {
-                new string [] {"1",""},""
-            },
-            {
-                new string [] {""},""
-            },
-            {
-                new string [] {"",""},""
+                new char [] {'H','a','n','n','a','h'},new char [] { 'h', 'a', 'n', 'n', 'a', 'H' }
             }
         };
     }
