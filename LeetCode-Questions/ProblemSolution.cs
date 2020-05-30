@@ -9,25 +9,31 @@ namespace LeetCode_Questions
         public bool ValidateSolutionAgainst(object key, object value)
         {
             //Convert Object to problem real type
-            var input = (Tuple<int[],int>)key;
+            var input = (int[])key;
 
             //Convert result object to problem output type
             var expectedResult = (int)value;
 
-            var result = RemoveElement(input.Item1,input.Item2);
+            var result = FindMaxConsecutiveOnes(input);
 
             return result.Equals( expectedResult);
         }
-        public int RemoveElement(int[] nums, int val)
+        public int FindMaxConsecutiveOnes(int[] nums)
         {
-            int i = 0;
-            int k = 0;
-            for (; i < nums.Length; i++)
+            SortedSet<int> maxOcc = new SortedSet<int>();
+            var occ = 0;
+            for (int i = 0; i < nums.Length; i++)
             {
-                if (nums[i]!=val)
-                    nums[k++] = nums[i];
+                if (nums[i] == 1)
+                    occ++;
+                else
+                {
+                    maxOcc.Add(occ);
+                    occ = 0;
+                }
             }
-            return k;
+            maxOcc.Add(occ);
+            return maxOcc.Last();
         }
     }
 }
