@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace LeetCode_Questions
 {
@@ -9,31 +8,38 @@ namespace LeetCode_Questions
         public bool ValidateSolutionAgainst(object key, object value)
         {
             //Convert Object to problem real type
-            var input = (int[])key;
+            var input = (Tuple<int, int[]>)key;
 
             //Convert result object to problem output type
             var expectedResult = (int)value;
 
-            var result = FindMaxConsecutiveOnes(input);
+            var result = MinSubArrayLen(input.Item1, input.Item2);
 
-            return result.Equals( expectedResult);
+            return result.Equals(expectedResult);
         }
-        public int FindMaxConsecutiveOnes(int[] nums)
+        public int MinSubArrayLen(int s, int[] nums)
         {
-            SortedSet<int> maxOcc = new SortedSet<int>();
-            var occ = 0;
+            int minAnswer = int.MaxValue;
             for (int i = 0; i < nums.Length; i++)
             {
-                if (nums[i] == 1)
-                    occ++;
-                else
+                int sum = nums[i];
+
+                if (sum >= s)
                 {
-                    maxOcc.Add(occ);
-                    occ = 0;
+                    minAnswer = minAnswer > 1 ? 1 : minAnswer;
+                    break;
+                }
+
+                for (int j = i + 1; j < nums.Length; j++)
+                {
+                    sum += nums[j];
+                    if (sum < s) continue;
+                    minAnswer = minAnswer > (j - i + 1) ? (j - i + 1) : minAnswer;;
+                    break;
+
                 }
             }
-            maxOcc.Add(occ);
-            return maxOcc.Last();
+            return minAnswer != int.MaxValue ? minAnswer : 0;
         }
     }
 }
