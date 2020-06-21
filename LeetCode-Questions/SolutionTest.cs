@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace LeetCode_Questions
 {
@@ -10,21 +9,21 @@ namespace LeetCode_Questions
         {
             var results = new List<bool>();
             ProblemSolution problem = new ProblemSolution();
-            foreach (var item in Inputs)
-                results.Add(problem.ValidateSolutionAgainst(item.Key, item.Value));
+            foreach (var (problemInput, problemOutput) in Inputs)
+                results.Add(problem.ValidateSolutionAgainst(problemInput, problemOutput));
             return results;
         }
 
-        private static Dictionary<object, object> Inputs = new Dictionary<object, object>()
+        private static readonly Dictionary<object, object> Inputs = new Dictionary<object, object>()
         {
             {
-                Tuple.Create(4,new int [] {1,4,4}),1
+                new [] {1,4,4},true
             },
             {
-                Tuple.Create(7,new int [] {2,3,1,2,4,3}),2
+                new [] {4,1,0},false
             },
             {
-                Tuple.Create(10,new int [] {10,0,5,4,1,11,}),1
+                new [] {1,4,3},false
             }
         };
     }

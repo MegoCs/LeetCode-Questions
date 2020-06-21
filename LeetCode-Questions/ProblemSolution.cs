@@ -1,45 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace LeetCode_Questions
 {
-    class ProblemSolution
+    internal class ProblemSolution
     {
         public bool ValidateSolutionAgainst(object key, object value)
         {
             //Convert Object to problem real type
-            var input = (Tuple<int, int[]>)key;
+            var input = (int[])key;
 
             //Convert result object to problem output type
-            var expectedResult = (int)value;
+            var expectedResult = (bool)value;
 
-            var result = MinSubArrayLen(input.Item1, input.Item2);
+            var result = ContainsDuplicate(input);
 
             return result.Equals(expectedResult);
         }
-        public int MinSubArrayLen(int s, int[] nums)
+        public bool ContainsDuplicate(int[] nums)
         {
-            int minAnswer = int.MaxValue;
-            for (int i = 0; i < nums.Length; i++)
+            HashSet<int> set = new HashSet<int>();
+            foreach (var num in nums)
             {
-                int sum = nums[i];
-
-                if (sum >= s)
-                {
-                    minAnswer = minAnswer > 1 ? 1 : minAnswer;
-                    break;
-                }
-
-                for (int j = i + 1; j < nums.Length; j++)
-                {
-                    sum += nums[j];
-                    if (sum < s) continue;
-                    minAnswer = minAnswer > (j - i + 1) ? (j - i + 1) : minAnswer;;
-                    break;
-
-                }
+                if (set.Contains(num))
+                    return true;
+                set.Add(num);
             }
-            return minAnswer != int.MaxValue ? minAnswer : 0;
+            return false;
         }
     }
 }
