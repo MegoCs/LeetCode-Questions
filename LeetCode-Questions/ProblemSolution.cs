@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-
+using System.Linq;
 namespace LeetCode_Questions
 {
     internal class ProblemSolution
@@ -10,22 +10,23 @@ namespace LeetCode_Questions
             var input = (int[])key;
 
             //Convert result object to problem output type
-            var expectedResult = (bool)value;
+            var expectedResult = (int)value;
 
-            var result = ContainsDuplicate(input);
+            var result = SingleNumber(input);
 
             return result.Equals(expectedResult);
         }
-        public bool ContainsDuplicate(int[] nums)
+        public int SingleNumber(int[] nums)
         {
-            HashSet<int> set = new HashSet<int>();
+            SortedSet<int> set = new SortedSet<int>();
             foreach (var num in nums)
             {
                 if (set.Contains(num))
-                    return true;
-                set.Add(num);
+                    set.Remove(num);
+                else
+                    set.Add(num);
             }
-            return false;
+            return set.First();
         }
     }
 }
