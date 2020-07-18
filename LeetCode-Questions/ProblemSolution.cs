@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace LeetCode_Questions
 {
@@ -7,33 +9,28 @@ namespace LeetCode_Questions
         public bool ValidateSolutionAgainst(object key, object value)
         {
             //Convert Object to problem real type
-            var input = (int)key;
+            var input = (Tuple<int[], int>)key;
 
             //Convert result object to problem output type
-            var expectedResult = (bool)value;
+            var expectedResult = (int[])value;
 
-            var result = IsHappy(input);
+            var result = TwoSum(input.Item1, input.Item2);
 
-            return result.Equals(expectedResult);
+            return result.SequenceEqual(expectedResult);
         }
-        public bool IsHappy(int n)
+        public int[] TwoSum(int[] nums, int target)
         {
-            HashSet<int> histroySet = new HashSet<int>();
-
-            while (!histroySet.Contains(n) && n != 1)
+            IDictionary<int, int> _map = new Dictionary<int, int>();
+            for (int i = 0; i < nums.Length; i++)
             {
-                histroySet.Add(n);
-                int newN = 0;
-                while (n != 0)
+                if (!_map.ContainsKey(nums[i]))
+                    _map.Add(nums[i], i);
+                if (_map.ContainsKey(target - nums[i]) && _map[target - nums[i]] != i)
                 {
-                    var digit = n % 10;
-                    var square = digit * digit;
-                    newN += square;
-                    n /= 10;
+                    return new int[] { _map[target - nums[i]], i };
                 }
-                n = newN;
             }
-            return n == 1;
+            return new int[] { };
         }
     }
 }

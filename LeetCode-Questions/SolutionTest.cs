@@ -18,7 +18,7 @@ namespace LeetCode_Questions
         private static readonly Dictionary<object, object> Inputs = new Dictionary<object, object>()
         {
             {
-                19,true
+                Tuple.Create(new int [] {3,3},6),new int []{0,1}
             }
         };
     }
