@@ -9,28 +9,33 @@ namespace LeetCode_Questions
         public bool ValidateSolutionAgainst(object key, object value)
         {
             //Convert Object to problem real type
-            var input = (Tuple<int[], int>)key;
+            var input = (Tuple<string, string>)key;
 
             //Convert result object to problem output type
-            var expectedResult = (int[])value;
+            var expectedResult = (bool)value;
 
-            var result = TwoSum(input.Item1, input.Item2);
+            var result = IsIsomorphic(input.Item1, input.Item2);
 
-            return result.SequenceEqual(expectedResult);
+            return result.Equals(expectedResult);
         }
-        public int[] TwoSum(int[] nums, int target)
+        public bool IsIsomorphic(string s, string t)
         {
-            IDictionary<int, int> _map = new Dictionary<int, int>();
-            for (int i = 0; i < nums.Length; i++)
+            IDictionary<char, char> _charMap = new Dictionary<char, char>();
+            for (int i = 0; i < s.Length; i++)
             {
-                if (!_map.ContainsKey(nums[i]))
-                    _map.Add(nums[i], i);
-                if (_map.ContainsKey(target - nums[i]) && _map[target - nums[i]] != i)
+                if (!_charMap.ContainsKey(s[i]))
                 {
-                    return new int[] { _map[target - nums[i]], i };
+                    if (_charMap.Values.Contains(t[i]))
+                        return false;
+                    _charMap.Add(s[i], t[i]);
+                }
+                else
+                {
+                    if (t[i] != _charMap[s[i]])
+                        return false;
                 }
             }
-            return new int[] { };
+            return true;
         }
     }
 }

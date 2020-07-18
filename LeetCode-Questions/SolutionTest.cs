@@ -18,8 +18,17 @@ namespace LeetCode_Questions
         private static readonly Dictionary<object, object> Inputs = new Dictionary<object, object>()
         {
             {
-                Tuple.Create(new int [] {3,3},6),new int []{0,1}
-            }
+                Tuple.Create("egg","add"),true
+            },
+            {
+                Tuple.Create("foo","bar"),false
+            },
+            {
+                Tuple.Create("paper","title"),true
+            },
+            {
+                Tuple.Create("ab","aa"),false
+            },
         };
     }
 }
