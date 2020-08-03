@@ -9,33 +9,31 @@ namespace LeetCode_Questions
         public bool ValidateSolutionAgainst(object key, object value)
         {
             //Convert Object to problem real type
-            var input = (Tuple<string, string>)key;
+            var input = (string)key;
 
             //Convert result object to problem output type
-            var expectedResult = (bool)value;
+            var expectedResult = (int)value;
 
-            var result = IsIsomorphic(input.Item1, input.Item2);
+            var result = FirstUniqChar(input);
 
             return result.Equals(expectedResult);
         }
-        public bool IsIsomorphic(string s, string t)
+        public int FirstUniqChar(string s)
         {
-            IDictionary<char, char> _charMap = new Dictionary<char, char>();
+            Dictionary<char, int> map = new Dictionary<char, int>();
             for (int i = 0; i < s.Length; i++)
             {
-                if (!_charMap.ContainsKey(s[i]))
-                {
-                    if (_charMap.Values.Contains(t[i]))
-                        return false;
-                    _charMap.Add(s[i], t[i]);
-                }
+                if (map.ContainsKey(s[i]))
+                    map[s[i]]++;
                 else
-                {
-                    if (t[i] != _charMap[s[i]])
-                        return false;
-                }
+                    map[s[i]] = 1;
             }
-            return true;
+            foreach (var item in map)
+            {
+                if(item.Value==1)
+                    return s.IndexOf(item.Key); 
+            }
+            return -1;
         }
     }
 }
