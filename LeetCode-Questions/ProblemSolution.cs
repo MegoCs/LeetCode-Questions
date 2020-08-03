@@ -9,31 +9,32 @@ namespace LeetCode_Questions
         public bool ValidateSolutionAgainst(object key, object value)
         {
             //Convert Object to problem real type
-            var input = (string)key;
+            var input = (Tuple<int[], int[]>)key;
 
             //Convert result object to problem output type
-            var expectedResult = (int)value;
+            var expectedResult = (int[])value;
 
-            var result = FirstUniqChar(input);
+            var result = Intersect(input.Item1, input.Item2);
 
-            return result.Equals(expectedResult);
+            return result.SequenceEqual(expectedResult);
         }
-        public int FirstUniqChar(string s)
+        public int[] Intersect(int[] nums1, int[] nums2)
         {
-            Dictionary<char, int> map = new Dictionary<char, int>();
-            for (int i = 0; i < s.Length; i++)
+            Dictionary<int, int> map1 = new Dictionary<int, int>();
+            List<int> result = new List<int>();
+            for (int i = 0; i < nums1.Length; i++)
             {
-                if (map.ContainsKey(s[i]))
-                    map[s[i]]++;
-                else
-                    map[s[i]] = 1;
+                _ = map1.ContainsKey(nums1[i]) ? map1[nums1[i]]++ : map1[nums1[i]] = 1;
             }
-            foreach (var item in map)
+            for (int i = 0; i < nums2.Length; i++)
             {
-                if(item.Value==1)
-                    return s.IndexOf(item.Key); 
+                if (map1.ContainsKey(nums2[i]) && map1[nums2[i]] > 0)
+                {
+                    result.Add(nums2[i]);
+                    map1[nums2[i]]--;
+                }
             }
-            return -1;
+            return result.ToArray();
         }
     }
 }
