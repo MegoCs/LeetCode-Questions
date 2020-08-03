@@ -9,32 +9,31 @@ namespace LeetCode_Questions
         public bool ValidateSolutionAgainst(object key, object value)
         {
             //Convert Object to problem real type
-            var input = (Tuple<int[], int[]>)key;
+            var input = (Tuple<int[], int>)key;
 
             //Convert result object to problem output type
-            var expectedResult = (int[])value;
+            var expectedResult = (bool)value;
 
-            var result = Intersect(input.Item1, input.Item2);
+            var result = ContainsNearbyDuplicate(input.Item1, input.Item2);
 
-            return result.SequenceEqual(expectedResult);
+            return result.Equals(expectedResult);
         }
-        public int[] Intersect(int[] nums1, int[] nums2)
+        public bool ContainsNearbyDuplicate(int[] nums, int k)
         {
-            Dictionary<int, int> map1 = new Dictionary<int, int>();
-            List<int> result = new List<int>();
-            for (int i = 0; i < nums1.Length; i++)
+            Dictionary<int, int> map = new Dictionary<int, int>();
+            for (int i = 0; i < nums.Length; i++)
             {
-                _ = map1.ContainsKey(nums1[i]) ? map1[nums1[i]]++ : map1[nums1[i]] = 1;
-            }
-            for (int i = 0; i < nums2.Length; i++)
-            {
-                if (map1.ContainsKey(nums2[i]) && map1[nums2[i]] > 0)
+                if (map.ContainsKey(nums[i]))
                 {
-                    result.Add(nums2[i]);
-                    map1[nums2[i]]--;
+                    if (Math.Abs(map[nums[i]] - i) <= k)
+                        return true;
+                    else
+                        map[nums[i]] = i;
                 }
+                else
+                    map[nums[i]] = i;
             }
-            return result.ToArray();
+            return false;
         }
     }
 }
