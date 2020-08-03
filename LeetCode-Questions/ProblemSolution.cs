@@ -9,31 +9,27 @@ namespace LeetCode_Questions
         public bool ValidateSolutionAgainst(object key, object value)
         {
             //Convert Object to problem real type
-            var input = (Tuple<int[], int>)key;
+            var input = (string[])key;
 
             //Convert result object to problem output type
-            var expectedResult = (bool)value;
+            var expectedResult = (List<List<string>>)value;
 
-            var result = ContainsNearbyDuplicate(input.Item1, input.Item2);
+            var result = GroupAnagrams(input);
 
-            return result.Equals(expectedResult);
+            return result.SequenceEqual(expectedResult);
         }
-        public bool ContainsNearbyDuplicate(int[] nums, int k)
+        public IList<IList<string>> GroupAnagrams(string[] strs)
         {
-            Dictionary<int, int> map = new Dictionary<int, int>();
-            for (int i = 0; i < nums.Length; i++)
+            Dictionary<string, IList<string>> map = new Dictionary<string, IList<string>>();
+            for (int i = 0; i < strs.Length; i++)
             {
-                if (map.ContainsKey(nums[i]))
-                {
-                    if (Math.Abs(map[nums[i]] - i) <= k)
-                        return true;
-                    else
-                        map[nums[i]] = i;
-                }
+                var sortedValue = String.Concat(strs[i].OrderBy(c => c));
+                if (map.ContainsKey(sortedValue))
+                    map[sortedValue].Add(strs[i]);
                 else
-                    map[nums[i]] = i;
+                    map[sortedValue] = new List<string>() { strs[i] };
             }
-            return false;
+            return map.Values.ToList();
         }
     }
 }

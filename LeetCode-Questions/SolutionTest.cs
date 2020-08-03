@@ -18,13 +18,17 @@ namespace LeetCode_Questions
         private static readonly Dictionary<object, object> Inputs = new Dictionary<object, object>()
         {
             {
-                Tuple.Create(new int []{1,2,3,1},3),true
-            },
-            {
-                Tuple.Create(new int []{1,0,1,1},1),true
-            },
-            {
-                Tuple.Create(new int []{1,2,3,1,2,3},2),false
+                new string [] {"eat", "tea", "tan", "ate", "nat", "bat"}, new List<List<string>>(){
+                    new List<string>(){
+"eat","tea","ate"
+                    },
+                    new List<string>(){
+"tan","nat"
+                    },
+                    new List<string>(){
+"bat"
+                    },
+                }
             }
         };
     }
