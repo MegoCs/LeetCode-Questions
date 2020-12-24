@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace LeetCode_Questions
 {
@@ -9,34 +10,26 @@ namespace LeetCode_Questions
         public bool ValidateSolutionAgainst(object inputObj, object expectedObj)
         {
             //Convert Object to problem real type
-            var input = (int)inputObj;
+            var input = (string)inputObj;
 
             //Convert result object to problem output type
-            var expectedResult = (IList<int>)expectedObj;
+            var expectedResult = (string)expectedObj;
 
-            var result = GetRow(input);
+            var result = ReverseWords(input);
 
             return result.SequenceEqual(expectedResult);
         }
-        public IList<int> GetRow(int rowIndex)
+        public string ReverseWords(string s)
         {
-            List<List<int>> pascalTriangle = new List<List<int>>();
-            pascalTriangle.Add(new List<int>() { 1 });
-            pascalTriangle.Add(new List<int>() { 1, 1 });
-
-            for (int i = 2; i <= rowIndex; i++)
+            var words = s.Split(" ");
+            StringBuilder result = new StringBuilder();
+            for (int i = words.Length-1; i >= 0; i--)
             {
-                pascalTriangle.Add(new List<int>
-                {
-                    1
-                });
-                for (int j = 1; j < i; j++)
-                {
-                    pascalTriangle[i].Add(pascalTriangle[i - 1][j - 1] + pascalTriangle[i - 1][j]);
-                }
-                pascalTriangle[i].Add(1);
+                if (!string.IsNullOrWhiteSpace(words[i]))
+                    result.Append(words[i] + " ");
             }
-            return pascalTriangle[rowIndex];
+            result=result.Remove(result.Length-1, 1);
+            return result.ToString();
         }
     }
 }

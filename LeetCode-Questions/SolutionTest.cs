@@ -20,13 +20,13 @@ namespace LeetCode_Questions
         private static readonly Dictionary<object, object> Inputs = new Dictionary<object, object>()
         {
             {
-               4,new int []{ 1,4,6,4,1}
+               "the sky is blue","blue is sky the"
             },
             {
-               1,new int []{ 1,1}
+               "  hello world  ","world hello"
             },
             {
-               0,new int []{ 1}
+               "a good   example","example good a"
             }
         };
     }
