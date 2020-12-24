@@ -20,13 +20,7 @@ namespace LeetCode_Questions
         private static readonly Dictionary<object, object> Inputs = new Dictionary<object, object>()
         {
             {
-               "the sky is blue","blue is sky the"
-            },
-            {
-               "  hello world  ","world hello"
-            },
-            {
-               "a good   example","example good a"
+               "Let's take LeetCode contest","s'teL ekat edoCteeL tsetnoc"
             }
         };
     }

@@ -23,11 +23,15 @@ namespace LeetCode_Questions
         {
             var words = s.Split(" ");
             StringBuilder result = new StringBuilder();
-            for (int i = words.Length-1; i >= 0; i--)
+            for (int i = 0; i < words.Length; i++)
             {
                 if (!string.IsNullOrWhiteSpace(words[i]))
-                    result.Append(words[i] + " ");
+                {
+                    var rev = new string(words[i].Reverse().ToArray());
+                    result.Append(rev+" "); 
+                }
             }
+            if(result.Length>0)
             result=result.Remove(result.Length-1, 1);
             return result.ToString();
         }
