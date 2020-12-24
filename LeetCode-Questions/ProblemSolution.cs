@@ -6,30 +6,37 @@ namespace LeetCode_Questions
 {
     internal class ProblemSolution
     {
-        public bool ValidateSolutionAgainst(object key, object value)
+        public bool ValidateSolutionAgainst(object inputObj, object expectedObj)
         {
             //Convert Object to problem real type
-            var input = (string[])key;
+            var input = (int)inputObj;
 
             //Convert result object to problem output type
-            var expectedResult = (List<List<string>>)value;
+            var expectedResult = (IList<int>)expectedObj;
 
-            var result = GroupAnagrams(input);
+            var result = GetRow(input);
 
             return result.SequenceEqual(expectedResult);
         }
-        public IList<IList<string>> GroupAnagrams(string[] strs)
+        public IList<int> GetRow(int rowIndex)
         {
-            Dictionary<string, IList<string>> map = new Dictionary<string, IList<string>>();
-            for (int i = 0; i < strs.Length; i++)
+            List<List<int>> pascalTriangle = new List<List<int>>();
+            pascalTriangle.Add(new List<int>() { 1 });
+            pascalTriangle.Add(new List<int>() { 1, 1 });
+
+            for (int i = 2; i <= rowIndex; i++)
             {
-                var sortedValue = String.Concat(strs[i].OrderBy(c => c));
-                if (map.ContainsKey(sortedValue))
-                    map[sortedValue].Add(strs[i]);
-                else
-                    map[sortedValue] = new List<string>() { strs[i] };
+                pascalTriangle.Add(new List<int>
+                {
+                    1
+                });
+                for (int j = 1; j < i; j++)
+                {
+                    pascalTriangle[i].Add(pascalTriangle[i - 1][j - 1] + pascalTriangle[i - 1][j]);
+                }
+                pascalTriangle[i].Add(1);
             }
-            return map.Values.ToList();
+            return pascalTriangle[rowIndex];
         }
     }
 }
