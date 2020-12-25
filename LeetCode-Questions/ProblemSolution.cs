@@ -1,39 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace LeetCode_Questions
+﻿namespace LeetCode_Questions
 {
     internal class ProblemSolution
     {
         public bool ValidateSolutionAgainst(object inputObj, object expectedObj)
         {
             //Convert Object to problem real type
-            var input = (string)inputObj;
+            var input = (int[])inputObj;
 
             //Convert result object to problem output type
-            var expectedResult = (string)expectedObj;
+            var expectedResult = (int)expectedObj;
 
-            var result = ReverseWords(input);
+            var result = RemoveDuplicates(input);
 
-            return result.SequenceEqual(expectedResult);
+            return result.Equals(expectedResult);
         }
-        public string ReverseWords(string s)
+        public int RemoveDuplicates(int[] nums)
         {
-            var words = s.Split(" ");
-            StringBuilder result = new StringBuilder();
-            for (int i = 0; i < words.Length; i++)
+            int lastUnique=0;
+            if (nums.Length == 0)
+                return 0;
+            for (int i = 1; i < nums.Length; i++)
             {
-                if (!string.IsNullOrWhiteSpace(words[i]))
+                if (nums[i] != nums[i - 1])
                 {
-                    var rev = new string(words[i].Reverse().ToArray());
-                    result.Append(rev+" "); 
+                    while (i < nums.Length - 1 && nums[i]==nums[i+1])
+                    {
+                        i++;
+                    }
+                    nums[++lastUnique] = nums[i];
                 }
             }
-            if(result.Length>0)
-            result=result.Remove(result.Length-1, 1);
-            return result.ToString();
+            return lastUnique+1;
         }
     }
 }

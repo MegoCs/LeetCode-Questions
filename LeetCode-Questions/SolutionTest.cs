@@ -20,7 +20,7 @@ namespace LeetCode_Questions
         private static readonly Dictionary<object, object> Inputs = new Dictionary<object, object>()
         {
             {
-               "Let's take LeetCode contest","s'teL ekat edoCteeL tsetnoc"
+               new int[] {0,0,1,1,1,2,2,3,3,4},5
             }
         };
     }
