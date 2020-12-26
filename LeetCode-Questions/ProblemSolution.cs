@@ -13,23 +13,27 @@ namespace LeetCode_Questions
             //Convert result object to problem output type
             var expectedResult = (int[])expectedObj;
 
-            //var result = 
-                MoveZeroes(input);
+            var result = SortArrayByParity(input);
 
-            return true;// result.SequenceEqual(expectedResult);
+            return result.SequenceEqual(expectedResult);
         }
-        public void MoveZeroes(int[] nums)
+        public int[] SortArrayByParity(int[] A)
         {
-            int nextNonZeroLocation = 0;
-            for (int i = 0; i < nums.Length; i++)
+            int nextEvenLoc = int.MaxValue;
+            for (int i = 0; i < A.Length; i++)
             {
-                if (nums[i] != 0)
+                if(A[i] % 2 != 0)
                 {
-                    nums[nextNonZeroLocation++] = nums[i];
-                    if(i!=nextNonZeroLocation-1)
-                    nums[i] = 0;
+                    nextEvenLoc = i < nextEvenLoc ? i : nextEvenLoc;
+                }
+                if(A[i]%2==0&& nextEvenLoc!= int.MaxValue)
+                {
+                    int temp = A[i];
+                    A[i] = A[nextEvenLoc];
+                    A[nextEvenLoc++] = temp;
                 }
             }
+            return A;
         }
     }
 }
