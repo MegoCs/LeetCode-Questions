@@ -13,29 +13,23 @@ namespace LeetCode_Questions
             //Convert result object to problem output type
             var expectedResult = (int[])expectedObj;
 
-            var result = ReplaceElements(input);
+            //var result = 
+                MoveZeroes(input);
 
-            return result.SequenceEqual(expectedResult);
+            return true;// result.SequenceEqual(expectedResult);
         }
-        public int[] ReplaceElements(int[] arr)
+        public void MoveZeroes(int[] nums)
         {
-            int currentMax = arr[arr.Length - 1];
-
-            for (int i = arr.Length - 2; i >= 0; i--)
+            int nextNonZeroLocation = 0;
+            for (int i = 0; i < nums.Length; i++)
             {
-                if (arr[i] > currentMax)
+                if (nums[i] != 0)
                 {
-                    int temp = arr[i];
-                    arr[i] = currentMax;
-                    currentMax = temp;
-                }
-                else
-                {
-                    arr[i] = currentMax;
+                    nums[nextNonZeroLocation++] = nums[i];
+                    if(i!=nextNonZeroLocation-1)
+                    nums[i] = 0;
                 }
             }
-            arr[arr.Length - 1] = -1;
-            return arr;
         }
     }
 }
