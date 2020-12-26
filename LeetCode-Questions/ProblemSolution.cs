@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace LeetCode_Questions
@@ -14,30 +13,29 @@ namespace LeetCode_Questions
             //Convert result object to problem output type
             var expectedResult = (int[])expectedObj;
 
-            var result = SortedSquares(input);
+            var result = ReplaceElements(input);
 
             return result.SequenceEqual(expectedResult);
         }
-        public int[] SortedSquares(int[] nums)
+        public int[] ReplaceElements(int[] arr)
         {
-            int r =nums.Length - 1,l=0;
-            var result = new int[nums.Length];
-            for (int i = nums.Length-1; i >=0; i--)
+            int currentMax = arr[arr.Length - 1];
+
+            for (int i = arr.Length - 2; i >= 0; i--)
             {
-                var left = nums[l] * nums[l];
-                var right = nums[r]* nums[r];
-                if (left >= right)
+                if (arr[i] > currentMax)
                 {
-                    result[i]= left;
-                    l++;
+                    int temp = arr[i];
+                    arr[i] = currentMax;
+                    currentMax = temp;
                 }
                 else
                 {
-                    result[i] = right;
-                    r--;
+                    arr[i] = currentMax;
                 }
             }
-            return result;
+            arr[arr.Length - 1] = -1;
+            return arr;
         }
     }
 }
