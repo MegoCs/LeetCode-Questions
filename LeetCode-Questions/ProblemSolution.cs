@@ -1,4 +1,8 @@
-﻿namespace LeetCode_Questions
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace LeetCode_Questions
 {
     internal class ProblemSolution
     {
@@ -8,19 +12,30 @@
             var input = (int[])inputObj;
 
             //Convert result object to problem output type
-            var expectedResult = (int)expectedObj;
+            var expectedResult = (int[])expectedObj;
 
-            var result = FindNumbers(input);
+            var result = SortedSquares(input);
 
-            return result.Equals(expectedResult);
+            return result.SequenceEqual(expectedResult);
         }
-        public int FindNumbers(int[] nums)
+        public int[] SortedSquares(int[] nums)
         {
-            int result = 0;
-            for (int i = 0; i < nums.Length; i++)
+            int r =nums.Length - 1,l=0;
+            var result = new int[nums.Length];
+            for (int i = nums.Length-1; i >=0; i--)
             {
-                if (nums[i].ToString().Length % 2 == 0)
-                    result++;
+                var left = nums[l] * nums[l];
+                var right = nums[r]* nums[r];
+                if (left >= right)
+                {
+                    result[i]= left;
+                    l++;
+                }
+                else
+                {
+                    result[i] = right;
+                    r--;
+                }
             }
             return result;
         }
