@@ -20,7 +20,7 @@ namespace LeetCode_Questions
         private static readonly Dictionary<object, object> Inputs = new Dictionary<object, object>()
         {
             {
-               new int[] {0,1,2},new int[] { 0,2,1 }
+               new int[] {1,0,2,3,0,4,5,0},new int[] { 1, 0, 0, 2, 3, 0, 0, 4 }
             }
         };
     }

@@ -13,27 +13,25 @@ namespace LeetCode_Questions
             //Convert result object to problem output type
             var expectedResult = (int[])expectedObj;
 
-            var result = SortArrayByParity(input);
+            //var result = 
+                DuplicateZeros(input);
 
-            return result.SequenceEqual(expectedResult);
+            return true;//result.SequenceEqual(expectedResult);
         }
-        public int[] SortArrayByParity(int[] A)
+
+        public void DuplicateZeros(int[] arr)
         {
-            int nextEvenLoc = int.MaxValue;
-            for (int i = 0; i < A.Length; i++)
+            for (int i = 0; i < arr.Length-1; i++)
             {
-                if(A[i] % 2 != 0)
+                if (arr[i] == 0)
                 {
-                    nextEvenLoc = i < nextEvenLoc ? i : nextEvenLoc;
-                }
-                if(A[i]%2==0&& nextEvenLoc!= int.MaxValue)
-                {
-                    int temp = A[i];
-                    A[i] = A[nextEvenLoc];
-                    A[nextEvenLoc++] = temp;
+                    for (int j = arr.Length-1; j > i+1; j--)
+                    {
+                        arr[j] = arr[j-1];
+                    }
+                    arr[i++ + 1] = 0;
                 }
             }
-            return A;
         }
     }
 }
