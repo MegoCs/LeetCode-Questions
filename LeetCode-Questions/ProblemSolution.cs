@@ -14,22 +14,23 @@ namespace LeetCode_Questions
             //Convert result object to problem output type
             var expectedResult = (bool)expectedObj;
 
-            var result = CheckIfExist(input);
+            var result = ValidMountainArray(input);
 
             return result.Equals(expectedResult);
         }
 
-        public bool CheckIfExist(int[] arr)
+        public bool ValidMountainArray(int[] arr)
         {
-            HashSet<int> mem = new HashSet<int>();
-            for (int i = 0; i < arr.Length; i++)
-            {
-                if (mem.Contains(arr[i] * 2) || (arr[i]%2==0&&mem.Contains(arr[i] / 2)))
-                    return true;
-                if (!mem.Contains(arr[i]))
-                    mem.Add(arr[i]);
-            }
-            return false;
+            if (arr.Length < 3)
+                return false;
+            int i = 0;
+            while (i + 1 < arr.Length&&arr[i] < arr[i+1] )
+                i++;
+            if (i == arr.Length - 1 || i == 0)
+                return false;
+            while (i + 1 < arr.Length&&arr[i] > arr[i + 1])
+                i++;
+            return i == arr.Length-1;
         }
     }
 }
