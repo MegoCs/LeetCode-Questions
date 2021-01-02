@@ -21,7 +21,13 @@ namespace LeetCode_Questions
         private static readonly Dictionary<object, object> Inputs = new Dictionary<object, object>()
         {
             {
-               Tuple.Create(new []{ 12},new []{ 30}),165
+               new []{ 10,2,5,3},true
+            },
+            {
+               new []{7,1,14,11},true
+            },
+            {
+               new []{ 3,1,7,11},false
             }
         };
     }

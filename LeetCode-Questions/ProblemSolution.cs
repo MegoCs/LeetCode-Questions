@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace LeetCode_Questions
@@ -8,35 +9,27 @@ namespace LeetCode_Questions
         public bool ValidateSolutionAgainst(object inputObj, object expectedObj)
         {
             //Convert Object to problem real type
-            var input = (Tuple<int[],int[]>)inputObj;
+            var input = (int[])inputObj;
 
             //Convert result object to problem output type
-            var expectedResult = (int)expectedObj;
+            var expectedResult = (bool)expectedObj;
 
-            //var result = 
-            Merge(new[] { 1, 2, 3, 0, 0, 0 }, 3, new int [] { 2, 5, 6 }, 3);
+            var result = CheckIfExist(input);
 
-            return false; //result.Equals(expectedResult);
+            return result.Equals(expectedResult);
         }
 
-        public void Merge(int[] nums1, int m, int[] nums2, int n)
+        public bool CheckIfExist(int[] arr)
         {
-            int p1 = 0, p2 = 0;
-            while (p2 < nums2.Length)
+            HashSet<int> mem = new HashSet<int>();
+            for (int i = 0; i < arr.Length; i++)
             {
-                if (nums1[p1] > nums2[p2] || p1-p2 >= m)
-                {
-                    for (int j = nums1.Length - 1; j > p1; j--)
-                    {
-                        nums1[j] = nums1[j - 1];
-                    }
-                    nums1[p1++] = nums2[p2++];
-                }
-                else
-                {
-                    p1++;
-                }
+                if (mem.Contains(arr[i] * 2) || (arr[i]%2==0&&mem.Contains(arr[i] / 2)))
+                    return true;
+                if (!mem.Contains(arr[i]))
+                    mem.Add(arr[i]);
             }
+            return false;
         }
     }
 }
