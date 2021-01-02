@@ -8,28 +8,33 @@ namespace LeetCode_Questions
         public bool ValidateSolutionAgainst(object inputObj, object expectedObj)
         {
             //Convert Object to problem real type
-            var input = (int[])inputObj;
+            var input = (Tuple<int[],int[]>)inputObj;
 
             //Convert result object to problem output type
-            var expectedResult = (int[])expectedObj;
+            var expectedResult = (int)expectedObj;
 
             //var result = 
-                DuplicateZeros(input);
+            Merge(new[] { 1, 2, 3, 0, 0, 0 }, 3, new int [] { 2, 5, 6 }, 3);
 
-            return true;//result.SequenceEqual(expectedResult);
+            return false; //result.Equals(expectedResult);
         }
 
-        public void DuplicateZeros(int[] arr)
+        public void Merge(int[] nums1, int m, int[] nums2, int n)
         {
-            for (int i = 0; i < arr.Length-1; i++)
+            int p1 = 0, p2 = 0;
+            while (p2 < nums2.Length)
             {
-                if (arr[i] == 0)
+                if (nums1[p1] > nums2[p2] || p1-p2 >= m)
                 {
-                    for (int j = arr.Length-1; j > i+1; j--)
+                    for (int j = nums1.Length - 1; j > p1; j--)
                     {
-                        arr[j] = arr[j-1];
+                        nums1[j] = nums1[j - 1];
                     }
-                    arr[i++ + 1] = 0;
+                    nums1[p1++] = nums2[p2++];
+                }
+                else
+                {
+                    p1++;
                 }
             }
         }
