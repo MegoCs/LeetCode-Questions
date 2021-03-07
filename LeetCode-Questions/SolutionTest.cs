@@ -21,16 +21,10 @@ namespace LeetCode_Questions
         private static readonly Dictionary<object, object> Inputs = new Dictionary<object, object>()
         {
             {
-               123,321
+               4,2
             },
             {
-               -123,-321
-            },
-            {
-               120,21
-            },
-            {
-               0,0
+               8,2
             }
         };
     }
