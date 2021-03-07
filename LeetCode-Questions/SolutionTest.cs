@@ -21,13 +21,16 @@ namespace LeetCode_Questions
         private static readonly Dictionary<object, object> Inputs = new Dictionary<object, object>()
         {
             {
-               new int []{ 1,1,4,2,1,3},3
+               123,321
             },
             {
-               new int []{5,1,2,3,4},5
+               -123,-321
             },
             {
-               new int []{ 1,2,3,4,5},0
+               120,21
+            },
+            {
+               0,0
             }
         };
     }

@@ -9,27 +9,34 @@ namespace LeetCode_Questions
         public bool ValidateSolutionAgainst(object inputObj, object expectedObj)
         {
             //Convert Object to problem real type
-            var input = (int[])inputObj;
+            var input = (int)inputObj;
 
             //Convert result object to problem output type
             var expectedResult = (int)expectedObj;
 
-            var result = HeightChecker(input);
+            var result = Reverse(input);
 
             return result.Equals(expectedResult);
         }
 
-        public int HeightChecker(int[] heights)
+        public int Reverse(int x)
         {
-            var unchanged = (int[])heights.Clone();
-            heights = heights.OrderBy(x => x).ToArray();
-            int result = 0;
-            for (int i = 0; i < heights.Length; i++)
+            try
             {
-                if (heights[i] != unchanged[i])
-                    result++;
+                while (x % 10 == 0 && x!=0)
+                    x /= 10;
+
+                bool neg = x < 0;
+
+                string s = neg ? (x * -1).ToString() : x.ToString();
+                var rs = new string(s.Reverse().ToArray());
+
+                return neg ? int.Parse(rs) * -1 : int.Parse(rs);
             }
-            return result;
+            catch (Exception)
+            {
+                return 0;
+            }
         }
 
     }
