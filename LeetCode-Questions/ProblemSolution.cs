@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace LeetCode_Questions
+﻿namespace LeetCode_Questions
 {
     internal class ProblemSolution
     {
@@ -14,25 +10,24 @@ namespace LeetCode_Questions
             //Convert result object to problem output type
             var expectedResult = (string)expectedObj;
 
-            var result = SimplifyPath(input);
+            var result = MakeGood(input);
 
             return result.Equals(expectedResult);
         }
 
-        public string SimplifyPath(string path)
+        public string MakeGood(string s)
         {
-            var tokens = path.Split(@"/");
-            var validTokens = new Stack<string>();
-            foreach (var token in tokens)
+            if (string.IsNullOrEmpty(s))
+                return s;
+            for (int i = 0; i < s.Length - 1; i++)
             {
-                if (token == "" || token == ".")
-                    continue;
-                else if (!string.IsNullOrEmpty(token) && validTokens.Count>0&& token == "..")
-                    validTokens.Pop();
-                else if (token != "..")
-                    validTokens.Push(token);
+                if (char.ToLowerInvariant(s[i]) == char.ToLowerInvariant(s[i + 1]) && s[i] != s[i + 1])
+                {
+                    s=s.Remove(i, 2);
+                    i = -1;
+                }
             }
-            return "/" +string.Join("/", validTokens.Reverse());
+            return s;
         }
     }
 }

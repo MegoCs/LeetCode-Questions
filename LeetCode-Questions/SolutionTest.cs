@@ -21,10 +21,10 @@ namespace LeetCode_Questions
         private static readonly Dictionary<object, object> Inputs = new Dictionary<object, object>()
         {
             {
-               "/home/","/home"
+               "leEeetcode","leetcode"
             },
             {
-               "/home//foo/","/home/foo"
+               "abBAcC",""
             }
         };
     }
