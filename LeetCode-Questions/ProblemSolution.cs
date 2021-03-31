@@ -14,14 +14,23 @@ namespace LeetCode_Questions
             //Convert result object to problem output type
             var expectedResult = (int)expectedObj;
 
-            var result = MySqrt(input);
+            var result = RotatedDigits(input);
 
             return result.Equals(expectedResult);
         }
 
-        public int MySqrt(int x)
+        public int RotatedDigits(int N)
         {
-            return (int)Math.Sqrt(x);
+            int res= 0;
+            for (int i = 1; i <= N; i++)
+            {
+                string s = i.ToString();
+                if (s.Contains('3') || s.Contains('4') || s.Contains('7'))
+                    continue;
+                if (s.Contains('2') || s.Contains('5') || s.Contains('9') || s.Contains('6'))
+                    res++;
+            }
+            return res;
         }
     }
 }

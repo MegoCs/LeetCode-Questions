@@ -21,10 +21,7 @@ namespace LeetCode_Questions
         private static readonly Dictionary<object, object> Inputs = new Dictionary<object, object>()
         {
             {
-               4,2
-            },
-            {
-               8,2
+               12,5
             }
         };
     }
