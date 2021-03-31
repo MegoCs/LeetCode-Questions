@@ -21,10 +21,10 @@ namespace LeetCode_Questions
         private static readonly Dictionary<object, object> Inputs = new Dictionary<object, object>()
         {
             {
-               "leEeetcode","leetcode"
+               Tuple.Create(8,"UDDDUDUU"),1
             },
             {
-               "abBAcC",""
+               Tuple.Create(8,"DDUUUUDD"),1
             }
         };
     }
