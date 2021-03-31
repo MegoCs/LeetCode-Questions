@@ -9,28 +9,30 @@ namespace LeetCode_Questions
         public bool ValidateSolutionAgainst(object inputObj, object expectedObj)
         {
             //Convert Object to problem real type
-            var input = (int)inputObj;
+            var input = (string)inputObj;
 
             //Convert result object to problem output type
-            var expectedResult = (int)expectedObj;
+            var expectedResult = (string)expectedObj;
 
-            var result = RotatedDigits(input);
+            var result = SimplifyPath(input);
 
             return result.Equals(expectedResult);
         }
 
-        public int RotatedDigits(int N)
+        public string SimplifyPath(string path)
         {
-            int res= 0;
-            for (int i = 1; i <= N; i++)
+            var tokens = path.Split(@"/");
+            var validTokens = new Stack<string>();
+            foreach (var token in tokens)
             {
-                string s = i.ToString();
-                if (s.Contains('3') || s.Contains('4') || s.Contains('7'))
+                if (token == "" || token == ".")
                     continue;
-                if (s.Contains('2') || s.Contains('5') || s.Contains('9') || s.Contains('6'))
-                    res++;
+                else if (!string.IsNullOrEmpty(token) && validTokens.Count>0&& token == "..")
+                    validTokens.Pop();
+                else if (token != "..")
+                    validTokens.Push(token);
             }
-            return res;
+            return "/" +string.Join("/", validTokens.Reverse());
         }
     }
 }

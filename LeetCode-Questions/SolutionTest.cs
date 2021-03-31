@@ -21,7 +21,10 @@ namespace LeetCode_Questions
         private static readonly Dictionary<object, object> Inputs = new Dictionary<object, object>()
         {
             {
-               12,5
+               "/home/","/home"
+            },
+            {
+               "/home//foo/","/home/foo"
             }
         };
     }
