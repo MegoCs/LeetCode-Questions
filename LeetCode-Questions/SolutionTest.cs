@@ -1,4 +1,5 @@
-﻿using System;
+﻿#region PreSection
+using System;
 using System.Collections.Generic;
 
 namespace LeetCode_Questions
@@ -14,18 +15,22 @@ namespace LeetCode_Questions
             {
                 results.Add(problem.ValidateSolutionAgainst(problemInput, problemOutput));
             }
-
             return results;
-        }
+        } 
+#endregion
 
-        private static readonly Dictionary<object, object> Inputs = new Dictionary<object, object>()
+    private static readonly Dictionary<object, object> Inputs = new Dictionary<object, object>()
+    {
         {
-            {
-               Tuple.Create(8,"UDDDUDUU"),1
-            },
-            {
-               Tuple.Create(8,"DDUUUUDD"),1
-            }
-        };
+            Tuple.Create(8,"UDDDUDUU"),1
+        },
+        {
+            Tuple.Create(8,"DDUUUUDD"),1
+        }
+    };
+
+#region PostSection
+
     }
-}
+} 
+#endregion
