@@ -21,11 +21,17 @@ namespace LeetCode_Questions
 
     private static readonly Dictionary<object, object> Inputs = new Dictionary<object, object>()
     {
+        //{
+        //    new int []{ 0,1,0,0,0,1,0},3
+        //},
+        //{
+        //    new int []{ 0,0,0,0,1,0},3
+        //},
+        //{
+        //    new int []{ 0 ,0 ,1 ,0 ,0 ,1 ,0},4
+        //},
         {
-            Tuple.Create(8,"UDDDUDUU"),1
-        },
-        {
-            Tuple.Create(8,"DDUUUUDD"),1
+            new int []{ 0,1,0,0,0,0,0,1,0,1,0,0,0,1,0,0,1,0,1,0,0,0,0,1,0,0,1,0,0,1,0,1,0,1,0,1,0,0,0,1,0,1,0,0,0,1,0,1,0,1,0,0,0,1,0,1,0,0,0,1,0,1,0,0,0,1,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,1,0,1,0,1,0,1,0,0,0,0,0,0,1,0,0,0},53
         }
     };
 

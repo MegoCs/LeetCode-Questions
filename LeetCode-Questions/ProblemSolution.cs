@@ -7,33 +7,36 @@ namespace LeetCode_Questions
         public bool ValidateSolutionAgainst(object inputObj, object expectedObj)
         {
             //Convert Object to problem real type
-            var input = (Tuple<int, string>)inputObj;
+            var input = (int[])inputObj;
 
             //Convert result object to problem output type
             var expectedResult = (int)expectedObj;
 
-            var result = CountingValleys(input.Item1, input.Item2);
+            var result = JumpingOnClouds(input);
 
             return result.Equals(expectedResult);
         }
 
-        public int CountingValleys(int steps, string path)
+        public int JumpingOnClouds(int[] c)
         {
-            int seaLevel = 0, result = 0;
-            for (int i = 0; i < steps; i++)
+            int steps = 0,current=0;
+            for (int i = 1; i < c.Length-1; i++)
             {
-                if (path[i] == 'U')
+                if (c[i] == 0)
                 {
-                    seaLevel += 1;
-                    if (seaLevel == 0)
-                        result++;
-                }
-                else if (path[i] == 'D')
-                {
-                    seaLevel -= 1;
+                    steps++;
+                    if (c[i + 1] == 0 && i + 1 == current + 2)
+                    {
+                        current = i + 1;
+                        i++;
+                        if (current == c.Length - 1)
+                            steps--;
+                    }
+                    else
+                        current = i;
                 }
             }
-            return result;
+            return steps+1;
         }
 
     }
