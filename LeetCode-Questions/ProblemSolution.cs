@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace LeetCode_Questions
 {
@@ -7,37 +8,33 @@ namespace LeetCode_Questions
         public bool ValidateSolutionAgainst(object inputObj, object expectedObj)
         {
             //Convert Object to problem real type
-            var input = (int[])inputObj;
+            var input = (Tuple<string,long>)inputObj;
 
             //Convert result object to problem output type
-            var expectedResult = (int)expectedObj;
+            var expectedResult = (long)expectedObj;
 
-            var result = JumpingOnClouds(input);
+            var result = repeatedString(input.Item1,input.Item2);
 
             return result.Equals(expectedResult);
         }
 
-        public int JumpingOnClouds(int[] c)
+        static long repeatedString(string s, long n)
         {
-            int steps = 0,current=0;
-            for (int i = 1; i < c.Length-1; i++)
+            List<int> aIndecis= new List<int>();
+            for (int i = 0; i < s.Length; i++)
+                if (s[i] == 'a')
+                    aIndecis.Add(i);
+
+            double count = (n /s.Length)*aIndecis.Count;
+
+            for (int i = 0; i < aIndecis.Count; i++)
             {
-                if (c[i] == 0)
-                {
-                    steps++;
-                    if (c[i + 1] == 0 && i + 1 == current + 2)
-                    {
-                        current = i + 1;
-                        i++;
-                        if (current == c.Length - 1)
-                            steps--;
-                    }
-                    else
-                        current = i;
-                }
+                if (aIndecis[i] < n % s.Length)
+                    count++;
             }
-            return steps+1;
+            return (long)count;
         }
+
 
     }
 }
