@@ -22,11 +22,15 @@ namespace LeetCode_Questions
     private static readonly Dictionary<object, object> Inputs = new Dictionary<object, object>()
     {
         {
-            Tuple.Create("a",(long)1000000000000),(long)1000000000000
+                Tuple.Create(8,new List<string>(){ 
+                "8 1",
+                "5 8",
+                "7 3",
+                "8 6"
+                })
+            ,
+            6
         },
-        {
-            Tuple.Create("aadcdaccacabdaabadadaabacdcbcacabbbadbdadacbdadaccbbadbdcadbdcacacbcacddbcbbbaaccbaddcabaacbcaabbaaa",(long)942885108885),(long)330009788107
-        }
     };
 
 #region PostSection
