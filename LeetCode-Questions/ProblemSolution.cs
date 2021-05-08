@@ -21,23 +21,28 @@ namespace LeetCode_Questions
 
         public int solutionB(int[] A)
         {
-            int maxsubset = 0;
-            for (int i = 0; i < A.Length; i++)
+            if (A.Length == 1) return 1;
+            int even = A[0], odd = A[1];
+            int start = 0, max_len = 0;
+            for (int i = 2; i < A.Length; ++i)
             {
-                int andTotal = A[i],subsetLen=1;
-
-                for (int j = i+1; j < A.Length; j++)
+                if (i % 2 == 0 && A[i] != even || i % 2 == 1 && A[i] != odd)
                 {
-                    var restult = andTotal & A[j];
-                    if (restult > 0)
+                    max_len = Math.Max(max_len, i - start);
+                    start = i - 1;
+                    if (i % 2 == 0)
                     {
-                        andTotal &= A[j];
-                        subsetLen++;
+                        even = A[i];
+                        odd = A[i - 1];
+                    }
+                    else
+                    {
+                        even = A[i - 1];
+                        odd = A[i];
                     }
                 }
-                maxsubset = maxsubset > subsetLen ? maxsubset : subsetLen;
             }
-            return maxsubset;
+            return Math.Max(max_len, A.Length - start);
         }
     }
 }
