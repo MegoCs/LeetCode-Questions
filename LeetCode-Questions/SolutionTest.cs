@@ -22,14 +22,13 @@ namespace LeetCode_Questions
     private static readonly Dictionary<object, object> Inputs = new Dictionary<object, object>()
     {
         {
-                Tuple.Create(8,new List<string>(){ 
-                "8 1",
-                "5 8",
-                "7 3",
-                "8 6"
-                })
-            ,
-            6
+                new int [] { 13,7,2,8,3} , 3
+        },
+        {
+                new int [] { 1,2,4,8} , 1
+        },
+        {
+                new int [] { 16,16} , 2
         },
     };
 
